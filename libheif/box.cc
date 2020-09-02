@@ -1316,10 +1316,12 @@ Error Box_iloc::write_mdat_after_iloc(StreamWriter& writer)
   writer.write32(fourcc("mdat"));
 
   for (auto& item : m_items) {
-    item.base_offset = writer.get_position();
+    // item.base_offset = writer.get_position();
+    item.base_offset = 0;
 
     for (auto& extent : item.extents) {
-      extent.offset = writer.get_position() - item.base_offset;
+      // extent.offset = writer.get_position() - item.base_offset;
+      extent.offset = writer.get_position();
       extent.length = extent.data.size();
 
       writer.write(extent.data);
